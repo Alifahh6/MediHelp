@@ -208,4 +208,4 @@ lib/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/elsaw1/medihelp.git
+   git clone https://github.com/Alifahh6/medihelp.git

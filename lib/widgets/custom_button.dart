@@ -3,16 +3,24 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed; // Diubah menjadi nullable untuk fleksibilitas
   final bool isLoading;
   final bool isOutlined;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double? width;
+  final double? height;
 
   const CustomButton({
     super.key,
     required this.text,
-    required this.onPressed,
+    this.onPressed,
     this.isLoading = false,
     this.isOutlined = false,
+    this.backgroundColor,
+    this.textColor,
+    this.width,
+    this.height,
   });
 
   @override

@@ -96,7 +96,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
         );
       }
     }
-    debugPrint('✅ Scheduled ${hours.length * durationDays} notifications for $medicineName');
+    debugPrint(
+        '✅ Scheduled ${hours.length * durationDays} notifications for $medicineName');
   }
 
   Future<void> _cancelNotifications(int reminderId) async {
@@ -209,7 +210,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
                     children: [
                       Center(
                         child: Container(
-                          width: 40, height: 4,
+                          width: 40,
+                          height: 4,
                           decoration: BoxDecoration(
                             color: isDark
                                 ? Colors.grey.shade600
@@ -370,8 +372,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
                                       : Colors.grey.shade100,
                                   shape: BoxShape.circle,
                                 ),
-                                child:
-                                    const Icon(Icons.remove, size: 18),
+                                child: const Icon(Icons.remove, size: 18),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -499,7 +500,6 @@ class _ReminderScreenState extends State<ReminderScreen> {
         );
       }
     } else {
-      // addReminder sudah otomatis simpan ke reminders + medication_history + activities
       await provider.addReminder(data);
 
       final reminders = provider.reminders;
@@ -524,6 +524,122 @@ class _ReminderScreenState extends State<ReminderScreen> {
     }
   }
 
+  // ✅ PERBAIKAN UTAMA: hapus berdasarkan id (bukan index)
+  // agar tidak salah target saat list berubah
+  Future<void> _deleteReminder(Map<String, dynamic> reminder) async {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    // Dialog konfirmasi sebelum hapus
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: isDark ? const Color(0xFF1E1E1E) : Colors.white,
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Row(children: [
+          Icon(Icons.delete_outline, color: Colors.red.shade400),
+          const SizedBox(width: 8),
+          Text('Hapus Reminder',
+              style: TextStyle(
+                  color: isDark ? Colors.white : const Color(0xFF1E1E1E),
+                  fontSize: 18)),
+        ]),
+        content: Text(
+          'Hapus reminder "${reminder['name']}"?\nNotifikasi terjadwal juga akan dibatalkan.',
+          style: TextStyle(
+              color: isDark ? Colors.grey.shade300 : Colors.grey.shade700,
+              fontSize: 14),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text('Batal',
+                style: TextStyle(
+                    color:
+                        isDark ? Colors.white60 : Colors.grey.shade600)),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.pop(ctx, true),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12)),
+                elevation: 0),
+            child: const Text('Hapus',
+                style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true || !mounted) return;
+
+    // Tampilkan loading
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(
+        child: CircularProgressIndicator(color: Color(0xFF1E88E5)),
+      ),
+    );
+
+    try {
+      // ✅ _cancelNotifications dibungkus try-catch sendiri
+      // agar error ProGuard/R8 dari flutter_local_notifications
+      // tidak menghentikan proses hapus data Firestore
+      try {
+        final reminderId = reminder['id'] ?? reminder['name'];
+        await _cancelNotifications(reminderId.hashCode);
+      } catch (notifError) {
+        debugPrint('⚠️ Cancel notif error (diabaikan): $notifError');
+      }
+
+      final provider = Provider.of<ReminderProvider>(context, listen: false);
+
+      // Cari index fresh dari provider berdasarkan id
+      final freshIndex = provider.reminders
+          .indexWhere((r) => r['id'] == reminder['id']);
+
+      // Tutup loading
+      if (mounted) Navigator.pop(context);
+
+      if (freshIndex == -1) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content: Text(
+                    'Debug: id="${reminder['id']}", total=${provider.reminders.length}'),
+                backgroundColor: Colors.orange,
+                duration: const Duration(seconds: 8)),
+          );
+        }
+        return;
+      }
+
+      await provider.removeReminder(freshIndex);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Reminder berhasil dihapus'),
+              backgroundColor: Color(0xFF1E88E5)),
+        );
+      }
+    } catch (e) {
+      // Tutup loading jika error
+      if (mounted) Navigator.pop(context);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text('Error: $e'),
+              backgroundColor: Colors.red,
+              duration: const Duration(seconds: 8)),
+        );
+      }
+    }
+  }
+
   Widget _sectionLabel(String text, Color textColor) => Text(
         text,
         style: TextStyle(
@@ -538,8 +654,7 @@ class _ReminderScreenState extends State<ReminderScreen> {
       InputDecoration(
         hintText: hint,
         hintStyle: TextStyle(
-            color:
-                isDark ? Colors.grey.shade500 : Colors.grey.shade400,
+            color: isDark ? Colors.grey.shade500 : Colors.grey.shade400,
             fontSize: 14),
         filled: true,
         fillColor: inputFill,
@@ -597,7 +712,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
               GestureDetector(
                 onTap: onDecrement,
                 child: Container(
-                  width: 32, height: 32,
+                  width: 32,
+                  height: 32,
                   decoration: BoxDecoration(
                     color: isDark
                         ? const Color(0xFF3A3A3A)
@@ -618,7 +734,8 @@ class _ReminderScreenState extends State<ReminderScreen> {
               GestureDetector(
                 onTap: onIncrement,
                 child: Container(
-                  width: 32, height: 32,
+                  width: 32,
+                  height: 32,
                   decoration: BoxDecoration(
                     color: isDark
                         ? const Color(0xFF3A3A3A)
@@ -688,15 +805,16 @@ class _ReminderScreenState extends State<ReminderScreen> {
               padding: const EdgeInsets.all(20),
               itemCount: reminders.length,
               itemBuilder: (context, index) {
-                final reminder = reminders[index];
+                // ✅ Ambil snapshot reminder di awal builder
+                // agar seluruh widget dalam item pakai data yang sama
+                final reminder =
+                    Map<String, dynamic>.from(reminders[index]);
                 final isActive = reminder['isActive'] as bool;
 
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
-                    color: isDark
-                        ? const Color(0xFF1E1E1E)
-                        : Colors.white,
+                    color: isDark ? const Color(0xFF1E1E1E) : Colors.white,
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
@@ -826,12 +944,10 @@ class _ReminderScreenState extends State<ReminderScreen> {
                         ),
                         Align(
                           alignment: Alignment.centerRight,
+                          // ✅ Panggil _deleteReminder dengan data reminder,
+                          // bukan index — aman meski list berubah
                           child: TextButton.icon(
-                            onPressed: () async {
-                              final id = reminder['id'] ?? index;
-                              await _cancelNotifications(id.hashCode);
-                              await provider.removeReminder(index);
-                            },
+                            onPressed: () => _deleteReminder(reminder),
                             icon: Icon(Icons.delete_outline,
                                 size: 16, color: Colors.red.shade300),
                             label: Text('Hapus',

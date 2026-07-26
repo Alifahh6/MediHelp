@@ -209,3 +209,34 @@ lib/
 1. **Clone the repository**
    ```bash
    git clone https://github.com/Alifahh6/medihelp.git
+
+
+
+## 📱 Tampilan Aplikasi
+
+Berikut adalah tampilan antarmuka utama aplikasi MediHelp:
+
+### Onboarding & Autentikasi
+| Splash Screen | Login |
+|:---:|:---:|
+| ![Splash Screen](<img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 37" src="https://github.com/user-attachments/assets/54f314bb-5430-4d04-b0b0-72b5df77b6e9" />) | ![Login](<img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 39 (2)" src="https://github.com/user-attachments/assets/42633854-4389-44bd-9334-d9e96918b164" />) |
+
+### Halaman Utama & Profil
+| Home | Profile |
+|:---:|:---:|
+| ![Home](screenshots/home.png) | ![Profile](screenshots/profile.png) |
+
+### Fitur Layanan Kesehatan
+| History | Queue | Nearby |
+|:---:|:---:|:---:|
+| ![History](screenshots/history.png) | ![Queue](screenshots/queue.png) | ![Nearby](screenshots/nearby.png) |
+
+### Fitur Rekam Medis & Pengingat
+| Record | Reminder |
+|:---:|:---:|
+| ![Record](screenshots/record.png) | ![Reminder](screenshots/reminder.png) |
+
+### Dark Mode
+| Home (Dark) | Reminder (Dark) |
+|:---:|:---:|
+| ![Home Dark](screenshots/home_dark.png) | ![Reminder Dark](screenshots/reminder_dark.png) |

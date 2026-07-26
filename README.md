@@ -210,33 +210,31 @@ lib/
    ```bash
    git clone https://github.com/Alifahh6/medihelp.git
 
-
-
 ## 📱 Tampilan Aplikasi
 
 Berikut adalah tampilan antarmuka utama aplikasi MediHelp:
 
 ### Onboarding & Autentikasi
-| Splash Screen | Login |
-|:---:|:---:|
-| ![Splash Screen](<img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 37" src="https://github.com/user-attachments/assets/54f314bb-5430-4d04-b0b0-72b5df77b6e9" />) | ![Login](<img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 39 (2)" src="https://github.com/user-attachments/assets/42633854-4389-44bd-9334-d9e96918b164" />) |
+| Splash Screen | Login | Signin | 
+|:---:|:---:| :---:|
+| <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 37" src="https://github.com/user-attachments/assets/32d806fd-5d71-4a46-a986-df1d377fe785" />| <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 39 (2)" src="https://github.com/user-attachments/assets/42633854-4389-44bd-9334-d9e96918b164" /> | <img width="1080" height="2340" alt="WhatsApp Image 2026-05-16 at 15 36 39 (1)" src="https://github.com/user-attachments/assets/d0e157e3-9275-4560-9d35-e0c65d6725e3" /> |
 
 ### Halaman Utama & Profil
 | Home | Profile |
 |:---:|:---:|
-| ![Home](screenshots/home.png) | ![Profile](screenshots/profile.png) |
+| <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 36" src="https://github.com/user-attachments/assets/4a24fa72-a8a2-426e-98cd-2798f6f40558" /> | <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 38" src="https://github.com/user-attachments/assets/c6d018b6-701a-4850-9d4b-a3358b2e08f1" /> |
 
 ### Fitur Layanan Kesehatan
-| History | Queue | Nearby |
-|:---:|:---:|:---:|
-| ![History](screenshots/history.png) | ![Queue](screenshots/queue.png) | ![Nearby](screenshots/nearby.png) |
+| History | Queue | Nearby | FAQ |
+|:---:|:---:|:---:|:---:|
+| <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 50 51 (1)" src="https://github.com/user-attachments/assets/acfd4c17-be0a-4d23-9b8a-2f548a8e8574" /> | <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 37 (2)" src="https://github.com/user-attachments/assets/533002a4-1dd0-4822-9c76-ee5aef5a1b7f" /> | <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 38 (2)" src="https://github.com/user-attachments/assets/59932622-50a4-4be4-953b-523e15692500" /> | <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 36 38 (1)" src="https://github.com/user-attachments/assets/dac03d5d-1ac1-4e11-8bfe-cc01c631a0f6" /> |
 
 ### Fitur Rekam Medis & Pengingat
-| Record | Reminder |
+| Record | Reminder | 
 |:---:|:---:|
-| ![Record](screenshots/record.png) | ![Reminder](screenshots/reminder.png) |
+| <img width="1080" height="2340" alt="WhatsApp Image 2026-05-16 at 15 50 45" src="https://github.com/user-attachments/assets/67a6de40-4b5b-430e-80b6-143d68e79d02" /> | <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 50 51" src="https://github.com/user-attachments/assets/21982ca5-6716-4676-8208-6b4749d277f0" /> |
 
 ### Dark Mode
 | Home (Dark) | Reminder (Dark) |
 |:---:|:---:|
-| ![Home Dark](screenshots/home_dark.png) | ![Reminder Dark](screenshots/reminder_dark.png) |
+| <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 50 47 (1)" src="https://github.com/user-attachments/assets/dd673841-28b4-4f48-bcf2-1693bba3c28c" /> | <img width="738" height="1600" alt="WhatsApp Image 2026-05-16 at 15 50 50" src="https://github.com/user-attachments/assets/1219be3e-42d0-4006-ac87-2842d58f2c3c" />  | 
